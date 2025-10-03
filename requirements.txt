@@ -1,0 +1,38 @@
+# Data manipulation and analysis
+numpy
+pandas
+
+# Web scraping
+requests
+beautifulsoup4
+curl_cffi
+pytrends
+
+# Dev and utilities
+tqdm
+python-dotenv
+streamlit
+
+# Visualization
+matplotlib
+seaborn
+plotly
+graphviz
+networkx
+missingno
+
+# Machine learning
+scikit-learn
+sentence-transformers
+xgboost
+scipy 
+
+# Jupyter
+jupyter
+ipykernel
+
+# MLflow for experiment tracking
+mlflow
+
+# Fuzzy matching
+rapidfuzz

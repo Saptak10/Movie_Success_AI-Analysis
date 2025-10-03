@@ -1,0 +1,27 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+
+# Environment
+.env
+.env.*
+
+# Data (large files, not for version control)
+data/
+
+# MLflow (machine-specific generated folder)
+mlruns/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+# Large model artifacts (optional — comment out if you want to track these)
+# artifacts/best_model.joblib
+*.db
