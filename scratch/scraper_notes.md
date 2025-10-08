@@ -1,5 +1,5 @@
 # Scraper Notes
-- The Numbers lists ~200 movies per page
-- Pagination: ?page=N, stops when no movies returned
-- Rate limit: 1 req/sec to avoid blocking
-- Fixed: last page detection
+- Added User-Agent header rotation
+- Sleep 1-2s between requests (random)
+- Retry on 429/503 with exponential backoff
+- Tested: 500 movies scraped without block
