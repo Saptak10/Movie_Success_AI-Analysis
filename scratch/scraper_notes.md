@@ -1,6 +1,7 @@
-# Scraper Notes - Test Run Results
-- 100 movie sample: 94% success rate
-- Failures: 6 movies with non-standard pages
-- Runtime missing in 8% of records
-- Google Trends: some movies return 0 (too old)
-- Decision: treat 0 trends as missing, not zero interest
+# Scraper Notes - Full Run
+- Total movies: 6,214
+- Metadata match rate: 89%
+- Google Trends match: 71% (older movies excluded)
+- Runtime missing: 12%
+- Runtime will be imputed with median by genre
+- Total scrape time: ~4 hours
