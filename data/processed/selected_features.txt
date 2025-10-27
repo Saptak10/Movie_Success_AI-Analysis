@@ -1,0 +1,10 @@
+# Forward Selected Features
+# Total: 6
+# Best F1-Score: 0.6585
+
+is_franchise
+release_year
+writer_avg_gross
+log_google_trends_average
+log_budget
+genre_Action
