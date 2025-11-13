@@ -1,8 +1,9 @@
-# EDA Notes - Target Variable
-## ROI Threshold Analysis
-- 1.5x: 52% Hit (too balanced on industry standard)
-- 2.0x: 41% Hit (chosen - standard profitability threshold)
-- 3.0x: 28% Hit (too imbalanced)
-## Decision: ROI >= 2.0x = Hit
-- Reasoning: covers P&A costs (~50% of budget)
-- Aligns with industry break-even estimates
+# EDA Notes - Outlier Analysis
+## Gross Revenue
+- Top 5 outliers: Avatar, Avengers, Star Wars, Jurassic World, Titanic
+- All legitimate data points - do not remove
+- Will apply log transform to normalize distribution
+## Budget
+- Lowest: $1,000 (indie films)
+- Highest: $400M (Pirates of Caribbean 3)
+- Bimodal: indie cluster (<$5M) and studio cluster (>$20M)
