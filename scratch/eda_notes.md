@@ -1,9 +1,9 @@
-# EDA Notes - Outlier Analysis
-## Gross Revenue
-- Top 5 outliers: Avatar, Avengers, Star Wars, Jurassic World, Titanic
-- All legitimate data points - do not remove
-- Will apply log transform to normalize distribution
-## Budget
-- Lowest: $1,000 (indie films)
-- Highest: $400M (Pirates of Caribbean 3)
-- Bimodal: indie cluster (<$5M) and studio cluster (>$20M)
+# Feature Engineering Notes
+## Temporal Features
+- is_summer: May-August releases (historically high revenue)
+- is_holiday: November-December (Oscar season + holidays)
+- release_year: captures industry trend changes over time
+## Correlation with target
+- is_summer: 0.12 (moderate positive)
+- is_holiday: 0.08 (slight positive)
+- release_year: -0.15 (newer films harder to be Hit)
