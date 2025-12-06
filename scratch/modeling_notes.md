@@ -1,9 +1,10 @@
-# Modeling Notes
-## Decision Tree Depth Sweep
-- depth=5: 60.1% test accuracy (underfit)
-- depth=10: 63.9% test accuracy (best)
-- depth=15: 63.2% test accuracy (slight overfit)
-- depth=20: 62.8% test accuracy (overfit)
-## Random Forest
-- 200 trees, max_depth=15: 65.8% test accuracy
-- OOB score: 64.2%
+# Modeling Notes - Feature Importance (Random Forest)
+1. is_franchise: 0.18
+2. director_avg_gross: 0.15
+3. log_budget: 0.14
+4. writer_avg_gross: 0.12
+5. log_google_trends_average: 0.10
+## Observation
+- Franchise status most important across all models
+- Budget less important than talent track record
+- Genre features collectively explain ~15%
