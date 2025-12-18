@@ -1,8 +1,8 @@
-# Modeling Notes - Threshold Analysis
-## Default threshold (0.5)
-- Precision: 67.1%, Recall: 67.0%, F1: 66.9%
-## Optimized threshold (0.45)
-- Precision: 63.2%, Recall: 71.4%, F1: 67.1%
-## Decision: keep 0.5 for interpretability
-- Marginal F1 gain not worth precision loss
-- Studios prefer balanced precision/recall
+# MLflow Experiment Tracking
+## Experiment: movie-success-prediction
+## Runs logged
+- decision_tree_v1: accuracy=0.639
+- random_forest_v1: accuracy=0.658
+- xgboost_baseline: accuracy=0.670
+- xgboost_forward_selected: accuracy=0.663
+## All params, metrics, and model artifacts logged
