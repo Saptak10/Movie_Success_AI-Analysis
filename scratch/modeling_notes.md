@@ -1,8 +1,10 @@
-# MLflow Experiment Tracking
-## Experiment: movie-success-prediction
-## Runs logged
-- decision_tree_v1: accuracy=0.639
-- random_forest_v1: accuracy=0.658
-- xgboost_baseline: accuracy=0.670
-- xgboost_forward_selected: accuracy=0.663
-## All params, metrics, and model artifacts logged
+# Hyperparameter Tuning - RandomizedSearchCV
+## Search Space
+- n_estimators: [100, 200, 300, 400, 500]
+- max_depth: [3, 4, 5, 6, 7, 8, 9]
+- learning_rate: [0.01, 0.05, 0.1, 0.15, 0.2, 0.3]
+- subsample: [0.6, 0.7, 0.8, 0.9, 1.0]
+- colsample_bytree: [0.6, 0.7, 0.8, 0.9, 1.0]
+## Best from RandomizedSearch
+- max_depth=7, lr=0.22, n_estimators=202
+- CV score: 0.668
