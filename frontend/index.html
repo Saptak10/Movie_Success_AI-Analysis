@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Movie Success Analysis</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Bootstrap 5 -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <!-- Your charts + custom styles -->
+  <link rel="stylesheet" href="css/charts.css" />
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- D3 for charts -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+
+  <script src="./js/chart12/chart12_movies_by_year.js"></script>
+  <script src="js/chart13/chart13_budget_by_year.js"></script>
+  <script src="js/chart14/data_completeness_data.js"></script>
+<script src="js/chart14/chart_completeness_heatmap.js"></script>
+
+<script src="js/chart15/data_missing_pattern.js"></script>
+<script src="js/chart15/chart_missing_pattern.js"></script>
+
+</head>
+<body class="bg-light">
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#hero">Movie Success Analysis</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#projectOverview">Overview</a></li>
+          <li class="nav-item"><a class="nav-link" href="#methodology">Methodology</a></li>
+          <li class="nav-item"><a class="nav-link" href="#visualization">Visualizations</a></li>
+          <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero" class="hero-banner text-light bg-info-subtle">
+    <div class="hero-overlay">
+      <div class="container py-5">
+        <div class="row align-items-center g-4">
+  
+          <!-- Left: title & CTA -->
+          <div class="col-lg-6">
+            <h1 class="display-4 fw-bold mb-3">Movie Success Analysis</h1>
+            <p class="lead text-danger fw-semibold mb-3">
+              Data Science With Python Project
+            </p>
+            <p class="mb-4 text-dark">
+              From raw web data to predicting whether a movie will be a flop, an
+              average performer, or a hit.
+            </p>
+            <a href="#visualization" class="btn btn-secondary btn-lg me-2">
+              Explore Visualizations
+            </a>
+            <a href="#methodology" class="btn btn-primary btn-lg">
+              View Pipeline
+            </a>
+          </div>
+  
+          <!-- Right: key stats card -->
+          <div class="col-lg-5 ms-lg-auto">
+            <div class="card bg-dark bg-opacity-100 border-0 shadow-lg text-light p-2">
+              <div class="card-body">
+                <h5 class="card-title p-3 bg-info bg-opacity-10 border border-info border-start-0 rounded-end">At a Glance</h5>
+                <div class="row small">
+                  <div class="col-6 mb-3">
+                    <div class="fw-semibold fs-4 text-warning">7k+</div>
+                    <div>Movies analysed</div>
+                  </div>
+                  <div class="col-6 mb-3">
+                    <div class="fw-semibold fs-4 text-warning">25+</div>
+                    <div>Features per film</div>
+                  </div>
+                  <div class="col-6">
+                    <div class="fw-semibold fs-4 text-warning">27</div>
+                    <div>Visualizations</div>
+                  </div>
+                  <div class="col-6">
+                    <div class="fw-semibold fs-4 text-warning">3</div>
+                    <div>Model families</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECT OVERVIEW -->
+  <section id="overview" class="py-5 bg-light">
+    <div class="container">
+  
+      <!-- Section heading -->
+      <div class="mb-4">
+        <span class="text-uppercase text-primary fw-semibold small">Overview</span>
+        <h2 class="h3 mt-1 mb-2">Data‑Driven Movie Success Analysis</h2>
+        <p class="text-muted mb-0">
+          From heterogeneous web data to explainable models that classify movies as
+          flops, average performers, or hits.
+        </p>
+      </div>
+  
+      <div class="row g-4 align-items-start">
+        <!-- Left: narrative -->
+        <div class="col-lg-7">
+          <div class="border-start border-4 border-primary ps-3 ps-md-4">
+            <p class="mb-3">
+              Studios and platforms routinely invest tens of millions into projects
+              whose commercial outcome is uncertain. This project brings together
+              budgets, revenues, release timing, genres, cast and crew credibility,
+              and pre‑release attention signals to understand why some titles break
+              out while others underperform.
+            </p>
+            <p class="mb-0">
+              The dataset is built from public sources (IMDb, TMDb, The Numbers,
+              Wikipedia, Wikimedia pageviews, and IMDb bulk datasets), cleaned and
+              normalised into an analysis‑ready table that links each film to rich
+              economic and creative metadata.
+            </p>
+          </div>
+        </div>
+  
+        <!-- Right: key bullets -->
+        <div class="col-lg-5">
+          <div class="card border-0 shadow-sm h-100 bg-success bg-opacity-75">
+            <div class="card-body text-light">
+              <h5 class="card-title mb-3 text-light fw-bold">What This Project Delivers</h5>
+              <ul class="list-unstyled small mb-0">
+                <li class="mb-2">
+                  <span class="fw-semibold">Exploratory insights</span> into how
+                  budget, genre, release timing, and audience interest relate to
+                  box‑office outcomes.
+                </li>
+                <li class="mb-2">
+                  <span class="fw-semibold">Classification models</span> that label
+                  each movie as Flop, Average, or Hit using tree‑based algorithms.
+                </li>
+                <li class="mb-2">
+                  <span class="fw-semibold">Feature importance analysis</span> to
+                  explain which creative and commercial factors drive predictions.
+                </li>
+                <li>
+                  <span class="fw-semibold">Interactive front‑end</span> where users
+                  can explore past films and run “what‑if” scenarios for new
+                  releases.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  </section>
+
+  <!-- METHODOLOGY -->
+  <section id="methodology" class="py-5 bg-white">
+    <div class="container">
+  
+      <div class="text-center mb-5">
+        <h2 class="mb-2">Methodology</h2>
+        <p class="text-muted mb-0">From raw web data to movie success predictions</p>
+      </div>
+  
+      <!-- Process pipeline -->
+      <div class="row justify-content-center mb-4">
+        <div class="col-lg-10">
+          <div class="process-steps d-flex flex-column flex-lg-row justify-content-between align-items-stretch">
+  
+            <!-- Step 1 -->
+            <div class="process-step text-center flex-fill border p-4 rounded m-2 bg-light">
+              <div class="step-icon-wrapper mx-auto mb-3">
+                <span class="step-index btn btn-primary">1</span>
+              </div>
+              <h5 class="mb-2">Data Collection</h5>
+              <p class="small text-muted mb-0">
+                Gather budgets, box‑office figures, rich metadata, cast and crew
+                information, and pre‑release activity from IMDb, TMDb, The Numbers,
+                Wikipedia, and Wikimedia pageviews.
+              </p>
+            </div>
+  
+            <!-- Step 2 -->
+            <div class="process-step text-center flex-fill border p-4 rounded m-2 bg-light">
+              <div class="step-icon-wrapper mx-auto mb-3">
+                <span class="step-index btn btn-danger">2</span>
+              </div>
+              <h5 class="mb-2">Wrangling &amp; EDA</h5>
+              <p class="small text-muted mb-0">
+                Clean and normalize sources, resolve duplicates, align identifiers,
+                and explore distributions, correlations, and segment patterns to
+                uncover data issues and signal.
+              </p>
+            </div>
+  
+            <!-- Step 3 -->
+            <div class="process-step text-center flex-fill border p-4 rounded m-2 bg-light">
+              <div class="step-icon-wrapper mx-auto mb-3">
+                <span class="step-index btn btn-warning">3</span>
+              </div>
+              <h5 class="mb-2">Feature Engineering</h5>
+              <p class="small text-muted mb-0">
+                Build economic and creative features such as log‑scaled profitability,
+                temporal indicators, genre encodings, and actor/director credibility
+                scores from historical filmography.
+              </p>
+            </div>
+  
+            <!-- Step 4 -->
+            <div class="process-step text-center flex-fill border p-4 rounded m-2 bg-light">
+              <div class="step-icon-wrapper mx-auto mb-3">
+                <span class="step-index btn btn-success">4</span>
+              </div>
+              <h5 class="mb-2">Modeling</h5>
+              <p class="small text-muted mb-0">
+                Cluster movies with similar profiles and train classifiers to predict
+                Flop, Average, or Hit while inspecting accuracy, class‑wise metrics,
+                and feature importance.
+              </p>
+            </div>
+  
+            <!-- Step 5 -->
+            <div class="process-step text-center flex-fill border p-4 rounded m-2 bg-light">
+              <div class="step-icon-wrapper mx-auto mb-3">
+                <span class="step-index btn btn-info">5</span>
+              </div>
+              <h5 class="mb-2">Deployment &amp; Frontend</h5>
+              <p class="small text-muted mb-0">
+                Expose cleaned data and models through a web interface where users can
+                explore past films, inspect predictions, and run “what‑if” scenarios
+                for new projects.
+              </p>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  </section>
+  
+  <!-- VISUALIZATIONS -->
+  <section id="visualization" class="py-5 bg-primary-subtle">
+    <div class="container">
+  
+      <!-- Section header -->
+      <div class="text-center mb-5">
+        <h2>Visual Explorations</h2>
+        <p class="text-muted mb-0">
+          A curated set of visual stories tracing data quality checks, 
+          exploration, model building, and deployment views.
+        </p>
+      </div>
+  
+      <!-- PIPELINE OVERVIEW (4 stages) -->
+      <div class="row justify-content-center mb-5">
+        <div class="col-lg-10">
+          <div class="process-steps d-flex flex-column flex-lg-row justify-content-between align-items-stretch">
+  
+            <div class="process-step text-center flex-fill">
+              <div class="step-icon-wrapper mx-auto mb-2"><span class="step-index btn btn-secondary">1</span></div>
+              <h6 class="mb-1">Data Quality & Shape</h6>
+              <p class="small text-muted mb-0">Missing‑value patterns, outliers, and distribution fixes that prepare the raw data.</p>
+            </div>
+  
+            <div class="process-step text-center flex-fill">
+              <div class="step-icon-wrapper mx-auto mb-2"><span class="step-index btn btn-warning">2</span></div>
+              <h6 class="mb-1">
+                Exploratory Patterns</h6>
+              <p class="small text-muted mb-0">Relationships between budget, revenue, timing, audience interest, and success.</p>
+            </div>
+  
+            <div class="process-step text-center flex-fill">
+              <div class="step-icon-wrapper mx-auto mb-2"><span class="step-index btn btn-info">3</span></div>
+              <h6 class="mb-1">Model Tuning & Performance</h6>
+              <p class="small text-muted mb-0">Validation curves, learning curves, ROC/PR plots, and confusion matrices.</p>
+            </div>
+  
+            <div class="process-step text-center flex-fill">
+              <div class="step-icon-wrapper mx-auto mb-2"><span class="step-index btn btn-danger">4</span></div>
+              <h6 class="mb-1">Feature Importance & Use</h6>
+              <p class="small text-muted mb-0">Which factors drive predictions and how the results surface in the web UI.</p>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion border border-secondary border-2 rounded" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button bg-secondary-subtle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              STEP 0 - DATA QUALITY & MISSINGNESS
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+            <div class="accordion-body bg-secondary-subtle">
+          <!-- ============================
+           STEP 0: DATA QUALITY & MISSINGNESS
+           ============================ -->
+           <div class="mb-4">
+            <h4 class="mb-3">0. Data Quality &amp; Missingness</h4>
+            <p class="text-muted small mb-3">
+              Visualizations that diagnose completeness, missing-value structure, and the
+              impact of basic cleaning steps before modelling.
+            </p>
+    
+            <div class="row g-4">
+              <!-- Q1: Data completeness heatmap (Chart12.png) -->
+              <div class="col-md-6 col-lg-6">
+                <div class="card h-100 shadow-sm">
+                  <img src="images/Charts/Chart12.png"
+                      class="card-img-top img-fluid"
+                      alt="Data completeness heatmap for sample of movies">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">Q1 · Data Completeness Heatmap</h5>
+                    <div id="chart-movies-by-year" class="chart-container"></div>
+                    <p class="card-text small">
+                      Presence-versus-missing heatmap across key fields for a random sample
+                      of movies, highlighting which variables require imputation.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- <div class="col-md-6 col-lg-6">
+                <div class="card h-100 shadow-sm">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">Movies Collected by Release Year</h5>
+                    <div id="chart-movies-by-year" class="chart-container bg-dark"></div>
+                    <p class="card-text small mt-2">
+                      Number of movies in the dataset per release year, showing growth in the collection.
+                    </p>
+                  </div>
+                </div>
+              </div> -->
+    
+              <div class="col-md-6 col-lg-6">
+                <div class="card h-100 shadow-sm">
+                  <img src="images/Charts/Chart13.png"
+                      class="card-img-top img-fluid"
+                      alt="Correlation matrix of missing-value indicators">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">V3 · Missingness Correlation</h5>
+                    <p class="card-text small">
+                      Correlation matrix of missing‑value indicators to identify features that
+                      tend to be absent together and may share common causes.
+                    </p>
+                  </div>
+                </div>
+              </div>
+    
+              <!-- <div class="col-md-6 col-lg-6">
+                <div class="card h-100 shadow-sm">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">Movie Budget Distribution by Year</h5>
+                    <div id="chart-budget-by-year" class="chart-container bg-dark"></div>
+                    <p class="card-text small">
+                      Budgets of individual movies plotted against release year, showing how
+                      production spending has grown over time.
+                    </p>
+                  </div>
+                </div>
+              </div> -->
+              
+              <div class="col-md-6 col-lg-6">
+                <div class="card h-100 shadow-sm">
+                  <img src="images/Charts/Chart14.png"
+                      class="card-img-top img-fluid"
+                      alt="Missing data pattern for random sample of movies">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">V4 · Missing Data Pattern</h5>
+                    <p class="card-text small">
+                      Binary pattern of missingness across a 500‑movie sample, showing which
+                      combinations of fields are most frequently incomplete.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- <div class="col-md-12 col-lg-6">
+                <div class="card h-100 shadow-sm">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">Data Completeness Heatmap (Sample of 100 Movies)</h5>
+                    <div id="chart-completeness-heatmap" class="chart-container bg-dark"></div>
+                    <p class="card-text small mt-2">
+                      Binary presence (green) versus missingness (red) for key features across a
+                      random sample of movies.
+                    </p>
+                  </div>
+                </div>
+              </div> -->
+              
+              <!-- Q4: Runtime IQR capping (Chart16.png) -->
+              <div class="col-md-6 col-lg-6">
+                <div class="card h-100 shadow-sm">
+                  <img src="images/Charts/Chart16.png"
+                      class="card-img-top img-fluid"
+                      alt="Runtime before and after IQR capping">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">Q4 · Outlier Treatment Example</h5>
+                    <p class="card-text small">
+                      Boxplots of runtime before and after IQR-based caps, illustrating how
+                      extreme values are controlled while preserving the bulk of the data.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- <div class="col-md-12 col-lg-12">
+                <div class="card h-100 shadow-sm">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">Missing Data Pattern (Random Sample)</h5>
+                    <div id="chart-missing-pattern" class="chart-container bg-dark"></div>
+                    <p class="card-text small mt-2">
+                      Stripe plot of missing (dark) versus present (light) values across a
+                      500‑movie sample for each feature.
+                    </p>
+                  </div>
+                </div>
+              </div>               -->
+    
+              <!-- Q2: Missing data pattern (Chart19.png) -->
+              <div class="col-md-6 col-lg-12">
+                <div class="card h-100 shadow-sm">
+                  <img src="images/Charts/Chart19.png"
+                      class="card-img-top img-fluid"
+                      alt="Missing data pattern across a sample of movies">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">Q2 · Missing Data Pattern</h5>
+                    <p class="card-text small">
+                      Binary pattern of missing and present values across 500 movies, used
+                      to detect structured gaps and problematic feature groups.
+                    </p>
+                  </div>
+                </div>
+              </div>
+    
+              <!-- Q3: Correlation of missing values (Chart18.png) -->
+              <div class="col-md-6 col-lg-12">
+                <div class="card h-100 shadow-sm">
+                  <img src="images/Charts/Chart18.png"
+                      class="card-img-top img-fluid"
+                      alt="Correlation matrix of missing-value indicators">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">Q3 · Correlation of Missingness</h5>
+                    <p class="card-text small">
+                      Correlation heatmap of missing-value indicators, showing which fields
+                      tend to be missing together and may share common causes.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed bg-warning-subtle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              STEP 1 - EDA & DISTRIBUTIONS
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body bg-warning-subtle">
+          <!-- ============================
+           STEP 1: EDA & DISTRIBUTIONS
+           ============================ -->
+           <div class="mb-4">
+            <h4 class="mb-3">1. Data Wrangling &amp; Exploratory Analysis</h4>
+            <p class="text-muted small mb-3">
+              Visualizations that reveal distributions, relationships, and anomalies in the raw movie data.
+            </p>
+            <div class="row g-4">
+              <!-- V1 -->
+              <!-- Correlation matrix card (Chart1.png) -->
+              <div class="col-md-6 col-lg-6">
+                <div class="card h-100 shadow-sm">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">V8 · Numerical Correlation Matrix</h5>
+                    <!-- Static image version -->
+                    <img src="images/Charts/Chart1.png"
+                        class="img-fluid rounded mb-2"
+                        alt="Correlation matrix of numerical features">
+                    <!-- If you switch to the D3 heatmap later, replace the img with:
+                    <div id="chart1-correlation" class="chart-container"></div>
+                    -->
+                    <p class="card-text small">
+                      Heatmap of correlations between budget, worldwide gross, timing, and
+                      log‑transformed variables, used to spot redundant or highly coupled
+                      features before modeling.
+                    </p>
+                  </div>
+                </div>
+              </div>
+      
+              <!-- V3 -->
+              <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                  <img src="images/Charts/Chart3.png" class="card-img-top" alt="V3: Log-scale revenue and budget relationship">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">V3 · Log‑Scale Revenue vs Budget</h5>
+                    <p class="card-text small">
+                      Histogram and scatter plot on log scales showing the long‑tail nature of revenue and
+                      the non‑linear budget–earnings relationship.
+                    </p>
+                  </div>
+                </div>
+              </div>
+    
+              <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                  <img src="images/Charts/Chart11.png"
+                       class="card-img-top img-fluid"
+                       alt="Budget vs worldwide gross with ROI colour scale">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">V5 · Budget vs Worldwide Gross</h5>
+                    <p class="card-text small">
+                      Log‑scale scatter of budget against worldwide gross, colour‑coded by ROI to
+                      highlight unusually profitable or unprofitable movies.
+                    </p>
+                  </div>
+                </div>
+              </div> 
+    
+              <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                  <img src="images/Charts/Chart23.png"
+                       class="card-img-top img-fluid"
+                       alt="Validation curve of F1 versus number of estimators">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">V10 · Validation Curve (n_estimators)</h5>
+                    <p class="card-text small">
+                      Training and cross‑validation F1 scores versus the number of estimators,
+                      used to pick a capacity that avoids overfitting.
+                    </p>
+                  </div>
+                </div>
+              </div>
+    
+              <div class="col-12">
+                <div class="card h-100 shadow-sm">
+                  <img src="images/Charts/Chart26.png"
+                       class="card-img-top img-fluid"
+                       alt="Hyperparameter sensitivity plots for XGBoost">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">V11 · Hyperparameter Sensitivity (XGBoost)</h5>
+                    <p class="card-text small">
+                      Mean F1 scores across ranges of key XGBoost hyperparameters, guiding the
+                      grid‑search design and interpreting which knobs matter most.
+                    </p>
+                  </div>
+                </div>
+              </div> 
+    
+              <div class="col-md-6 col-lg-6">
+                <div class="card h-100 shadow-sm">
+                  <img src="images/Charts/Chart22.png"
+                       class="card-img-top img-fluid"
+                       alt="Learning curve for XGBoost model">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">V12 · Learning Curve (XGBoost)</h5>
+                    <p class="card-text small">
+                      Learning curve showing how training and cross‑validation F1 evolve as more
+                      training examples are added, indicating remaining data hunger.
+                    </p>
+                  </div>
+                </div>
+              </div>
+    
+              <div class="col-12">
+                <div class="card h-100 shadow-sm">
+                  <img src="images/Charts/Chart25.png"
+                       class="card-img-top img-fluid"
+                       alt="Pairplot of top predictive features coloured by success class">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">V9 · Pairplot of Top Predictive Features</h5>
+                    <p class="card-text small">
+                      Pairwise scatterplots and distributions of key predictors, coloured by
+                      success class to visualise separability in feature space.
+                    </p>
+                  </div>
+                </div>
+              </div>             
+      
+              <!-- Repeat for V5, V6, V7 ... -->
+            </div>
+          </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed bg-info-subtle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              STEP 2 - FEATURE ENGINEERING
+            </button>
+          </h2>
+          <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body bg-info-subtle">
+          <!-- ============================
+           STEP 2: FEATURE ENGINEERING
+           ============================ -->
+           <div class="mb-4">
+            <h4 class="mb-3">2. Feature Engineering &amp; Importance</h4>
+            <p class="text-muted small mb-3">
+              Visualizations that explain how raw metadata is transformed into predictive signals.
+            </p>
+            <div class="row g-4">
+              <!-- V8 -->
+              <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                  <img src="images/Charts/Chart6.png"
+                       class="card-img-top img-fluid"
+                       alt="Top 15 feature importances for grid search model">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">V23 · XGBoost Importances (Grid Search)</h5>
+                    <p class="card-text small">
+                      Top 15 features in the grid‑search XGBoost model, showing franchise status and
+                      pre‑release interest as the strongest drivers of success.
+                    </p>
+                  </div>
+                </div>
+              </div>  
+              
+              <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                  <img src="images/Charts/Chart8.png"
+                       class="card-img-top img-fluid"
+                       alt="Top 15 feature importances for tuned XGBoost model">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">V24 · XGBoost Importances (Tuned)</h5>
+                    <p class="card-text small">
+                      Feature importance profile of the tuned XGBoost model, used to interpret
+                      which engineered variables most influence predictions.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                  <img src="images/Charts/Chart10.png"
+                       class="card-img-top img-fluid"
+                       alt="Compact view of top XGBoost feature importances">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">V25 · XGBoost Importances (Compact)</h5>
+                    <p class="card-text small">
+                      Compact bar chart of top XGBoost feature importances, reinforcing which
+                      predictors consistently dominate across model variants.
+                    </p>
+                  </div>
+                </div>
+              </div>   
+              
+              <div class="col-12">
+                <div class="card h-100 shadow-sm">
+                  <img src="images/Charts/Chart15.png"
+                       class="card-img-top img-fluid"
+                       alt="GridSearchCV mean test F1 and train versus test F1 scores">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">V13 · GridSearchCV Diagnostics</h5>
+                    <p class="card-text small">
+                      Left panel ranks parameter combinations by mean test F1, while the right
+                      panel compares train and test F1 scores to check overfitting.
+                    </p>
+                  </div>
+                </div>
+              </div>
+    
+              <div class="col-12">
+                <div class="card h-100 shadow-sm">
+                  <img src="images/Charts/Chart20.png"
+                       class="card-img-top img-fluid"
+                       alt="Correlation of features with success class target">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">V8 · Feature Correlation with Success Class</h5>
+                    <p class="card-text small">
+                      Correlation coefficients between each engineered feature and the success
+                      class target, highlighting which variables are most predictive.
+                    </p>
+                  </div>
+                </div>
+              </div>  
+              
+              <div class="col-12">
+                <div class="card h-100 shadow-sm">
+                  <img src="images/Charts/Chart21.png"
+                       class="card-img-top img-fluid"
+                       alt="Top 15 feature importances compared across models">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">V26 · Model‑Comparison Feature Importances</h5>
+                    <p class="card-text small">
+                      Side‑by‑side importances for decision tree, random forest, and XGBoost,
+                      showing which predictors are consistently influential across models.
+                    </p>
+                  </div>
+                </div>
+              </div>          
+      
+              <!-- V11–V14 placeholders... -->
+            </div>
+          </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed bg-danger-subtle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+              STEP 3 - MODEL PERFORMANCE
+            </button>
+          </h2>
+          <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body bg-danger-subtle">
+          <!-- ============================
+           STEP 3: MODEL PERFORMANCE
+           ============================ -->
+           <div class="mb-4">
+            <h4 class="mb-3">3. Model Performance &amp; Confusion Matrices</h4>
+            <p class="text-muted small mb-3">
+              How well models separate Flop, Average, and Hit movies.
+            </p>
+            <div class="row g-4">
+              <!-- Decision Tree (Chart4.png) -->
+              <div class="col-md-6 col-lg-3">
+                <div class="card h-100 shadow-sm">
+                  <img src="images/Charts/Chart4.png"
+                       class="card-img-top"
+                       alt="Decision tree confusion matrix">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">V17 · Decision Tree</h5>
+                    <p class="card-text small">
+                      Confusion matrix for the decision tree baseline, showing how a simple
+                      interpretable model separates Flop and Hit movies.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            
+              <!-- Random Forest baseline (Chart3.png) -->
+              <div class="col-md-6 col-lg-3">
+                <div class="card h-100 shadow-sm">
+                  <img src="images/Charts/Chart3.png"
+                       class="card-img-top"
+                       alt="Random forest baseline confusion matrix">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">V18 · Random Forest (Baseline)</h5>
+                    <p class="card-text small">
+                      Baseline random forest confusion matrix, improving class‑wise accuracy
+                      over the decision tree, but still misclassifying some clear hits.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            
+              <!-- Random Forest tuned (Chart2.png) -->
+              <div class="col-md-6 col-lg-3">
+                <div class="card h-100 shadow-sm">
+                  <img src="images/Charts/Chart2.png"
+                       class="card-img-top"
+                       alt="Random forest tuned confusion matrix">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">V19 · Random Forest (Tuned)</h5>
+                    <p class="card-text small">
+                      Tuned random forest confusion matrix, reducing errors for both Flop and
+                      Hit classes through optimized hyperparameters.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            
+              <!-- XGBoost test matrix (Chart5.png) -->
+              <div class="col-md-6 col-lg-3">
+                <div class="card h-100 shadow-sm">
+                  <img src="images/Charts/Chart5.png"
+                       class="card-img-top"
+                       alt="XGBoost confusion matrix on test data">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">V20 · XGBoost (Test)</h5>
+                    <p class="card-text small">
+                      XGBoost confusion matrix on the held‑out test set, showing the final
+                      model’s balance between correctly predicted flops and hits.
+                    </p>
+                  </div>
+                </div>
+              </div>
+    
+              <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                  <img src="images/Charts/Chart7.png"
+                       class="card-img-top img-fluid"
+                       alt="Confusion matrix for grid-search XGBoost model">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">V21 · XGBoost (Grid Search)</h5>
+                    <p class="card-text small">
+                      Confusion matrix for the grid‑search XGBoost model, comparing predicted and
+                      true Flop/Hit labels.
+                    </p>
+                  </div>
+                </div>
+              </div>
+    
+              <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                  <img src="images/Charts/Chart9.png"
+                       class="card-img-top img-fluid"
+                       alt="Confusion matrix for tuned XGBoost model">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">V22 · XGBoost (Tuned)</h5>
+                    <p class="card-text small">
+                      Confusion matrix for the tuned XGBoost model, showing improvements in both
+                      Flop and Hit prediction accuracy after hyperparameter tuning.
+                    </p>
+                  </div>
+                </div>
+              </div>  
+              
+              <div class="col-md-6 col-lg-6">
+                <div class="card h-100 shadow-sm">
+                  <img src="images/Charts/Chart24.png"
+                       class="card-img-top img-fluid"
+                       alt="ROC curves comparing decision tree, random forest, and XGBoost">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">V16 · ROC Curves (Model Comparison)</h5>
+                    <p class="card-text small">
+                      ROC curves and AUC scores for all three models, summarizing their ability
+                      to separate hits from flops across thresholds.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-6 col-lg-6">
+                <div class="card h-100 shadow-sm">
+                  <img src="images/Charts/Chart27.png"
+                       class="card-img-top img-fluid"
+                       alt="Precision–recall curves comparing decision tree, random forest, and XGBoost">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">V15 · Precision–Recall Curves</h5>
+                    <p class="card-text small">
+                      Precision–recall curves for all models, emphasising performance in the
+                      high‑precision, high‑recall region relevant for movie success prediction.
+                    </p>
+                  </div>
+                </div>
+              </div>          
+              
+            </div>
+            
+          </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed bg-success-subtle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+              STEP 4 - DEPLOYMENT VIEWS
+            </button>
+          </h2>
+          <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body bg-success-subtle">
+          <!-- ============================
+           STEP 4: DEPLOYMENT VIEWS
+           ============================ -->
+           <div class="mb-3">
+            <h4 class="mb-3">4. Deployment &amp; Simulation Views</h4>
+            <p class="text-muted small mb-3">
+              How the analysis is exposed in the web interface for exploration and “what‑if” experiments.
+            </p>
+            <div class="row g-4">
+              <!-- V22–V27 cards with UI mockups / screenshots -->
+              <!-- Example placeholder -->
+              <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                  <img src="images/Charts/chart22.png" class="card-img-top" alt="V22: Simulation form view">
+                  <div class="card-body bg-secondary text-light">
+                    <h5 class="card-title">V22 · Simulation Form</h5>
+                    <p class="card-text small">
+                      Input form for specifying genre, cast, director, budget, and release window to obtain
+                      Flop/Average/Hit predictions.
+                    </p>
+                  </div>
+                </div>
+              </div>
+      
+              <!-- Repeat similar cards up to V27 -->
+            </div>
+          </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+  
+  <!-- TEAM / FOOTER -->
+  <footer id="team" class="py-5 bg-dark text-light">
+    <div class="container">
+      <h2 class="h4 mb-4">Project Members</h2>
+      <div class="row g-4">
+        <div class="col-6 col-md-3">
+          <h6 class="mb-1 btn btn-secondary">Saptak Chakraborty</h6>
+          <p class="small mb-0 btn btn-primary">saptak.chakraborty@st.ovgu.de</p>
+        </div>
+        <div class="col-6 col-md-3">
+          <h6 class="mb-1 btn btn-secondary">Dr. Christian Beyer</h6>
+          <p class="small mb-0 btn btn-primary">christian.beyer@ovgu.de</p>
+        </div>
+        <div class="col-6 col-md-3">
+          <h6 class="mb-1 btn btn-secondary">Siddhi Belgamwar</h6>
+          <p class="small mb-0 btn btn-primary">siddhi.belgamwar@st.ovgu.de</p>
+        </div>
+      </div>
+
+      <hr class="border-secondary my-4" />
+      <p class="small mb-0">
+        &copy; Movie Success Analysis · Saptak Chakraborty
+      </p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+
+  <!-- Your chart script -->
+  <script src="js/chart1-correlation.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      initCorrelationHeatmap('chart1-correlation');
+    });
+  </script>
+</body>
+</html>
