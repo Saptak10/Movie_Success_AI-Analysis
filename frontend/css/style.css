@@ -1,0 +1,103 @@
+/* HERO BANNER WITH BACKGROUND IMAGE */
+.hero-banner {
+  position: relative;
+  min-height: 360px;
+  overflow: hidden;
+  color: #f8f9fa;
+}
+
+/* background image layer */
+.hero-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #001527 url("images/banner.jpg") no-repeat center center;
+  background-size: cover;
+  filter: blur(1px);
+  transform: scale(1.05);
+  z-index: -2;
+}
+
+/* dark/blue overlay so text stays readable */
+.hero-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.75),
+    rgba(0, 40, 120, 0.75)
+  );
+  z-index: -1;
+}
+
+/* place content above overlays */
+.hero-banner .hero-overlay {
+  position: relative;
+  padding-top: 5rem;
+  padding-bottom: 4rem;
+}
+
+@media (min-width: 992px) {
+  .hero-banner {
+    min-height: 420px;
+  }
+}
+
+/* Generic chart container */
+.chart-container {
+  width: 100%;
+  min-height: 260px;      /* important: give it height */
+  height: 260px;
+}
+
+/* On larger screens, make charts a bit taller */
+@media (min-width: 992px) {
+  .chart-container {
+    height: 300px;
+  }
+}
+
+/* Optional: axis labels / text */
+.axis-label {
+  font-size: 13px;
+  fill: #e9ecef;
+}
+
+.card-body.bg-secondary .axis-label {
+  fill: #f8f9fa;
+}
+
+/* Make SVG text readable on dark background */
+.card-body.bg-secondary svg text {
+  fill: #e9ecef;
+}
+
+.card-body.bg-secondary .grid-lines line {
+  stroke: rgba(255, 255, 255, 0.08);
+}
+
+.chart-container {
+  width: 100%;
+  min-height: 260px;
+  height: 260px;
+}
+
+@media (min-width: 992px) {
+  .chart-container {
+    height: 320px;
+  }
+}
+
+.axis-label {
+  font-size: 13px;
+  fill: #e9ecef;
+}
+
+.card-body.bg-secondary svg text {
+  fill: #e9ecef;
+}
+
+.card-body.bg-secondary .grid-lines line {
+  stroke: rgba(255, 255, 255, 0.08);
+}
