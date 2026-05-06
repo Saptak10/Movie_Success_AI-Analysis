@@ -6,6 +6,9 @@
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.53-red?logo=streamlit)](https://streamlit.io/)
 [![XGBoost](https://img.shields.io/badge/XGBoost-3.1-orange)](https://xgboost.readthedocs.io/)
 [![MLflow](https://img.shields.io/badge/MLflow-tracked-blue?logo=mlflow)](https://mlflow.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+**Live App:** [movie-success-ai-analysis.streamlit.app](https://movie-success-ai-analysis.streamlit.app/)
 
 ---
 
@@ -142,7 +145,10 @@ pip install -r requirements.txt
 
 ## Usage
 
-### Run the Streamlit App
+### Live Demo
+Try the deployed app at **[movie-success-ai-analysis.streamlit.app](https://movie-success-ai-analysis.streamlit.app/)**
+
+### Run Locally
 ```bash
 source .venv/bin/activate
 cd frontend
@@ -205,3 +211,9 @@ Data Collection  →  Wrangling & EDA  →  Feature Engineering
 ## Contributors
 
 - **Saptak Chakraborty**
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
