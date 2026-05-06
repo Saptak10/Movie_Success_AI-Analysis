@@ -22,6 +22,12 @@ mlruns/
 # macOS
 .DS_Store
 
+# Claude Code local config
+.claude/
+
+# Utility scripts (not part of the project)
+generate_commits.py
+
 # Large model artifacts (optional — comment out if you want to track these)
 # artifacts/best_model.joblib
 *.db
