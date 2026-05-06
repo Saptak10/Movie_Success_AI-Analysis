@@ -8,22 +8,23 @@ import plotly.graph_objects as go
 import joblib
 import json
 import os
+from pathlib import Path
 
 st.set_page_config(page_title="Pre-release Movie Success Analysis", layout="wide")
 
 # ---------------------------------------------------------------------
 # Utilities
 # ---------------------------------------------------------------------
-ARTIFACTS_DIR = "../artifacts"
-VIZ_DIR = f"{ARTIFACTS_DIR}/visualizations"
+# Use __file__ so paths work both locally and on Streamlit Cloud
+_HERE = Path(__file__).parent          # frontend/
+_ROOT = _HERE.parent                   # repo root
+
+ARTIFACTS_DIR = str(_ROOT / "artifacts")
+VIZ_DIR = str(_ROOT / "artifacts" / "visualizations")
 
 CANDIDATE_PATHS = [
-    "../artifacts/movies_final.csv",
-    "../data/processed/movie_dataset_processed.csv",
-    "data/movies_clean.csv",
-    "data/processed/movies_clean.csv",
-    "data/movies.csv",
-    "movies.csv",
+    str(_ROOT / "artifacts" / "movies_final.csv"),
+    str(_ROOT / "data" / "processed" / "movie_dataset_processed.csv"),
 ]
 
 # Visualization categories for organized display
